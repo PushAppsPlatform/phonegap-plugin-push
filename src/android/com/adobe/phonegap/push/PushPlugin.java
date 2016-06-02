@@ -23,6 +23,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import mobi.pushapps.PushApps;
+import mobi.pushapps.utils.PALogger;
+
 public class PushPlugin extends CordovaPlugin implements PushConstants {
 
     public static final String LOG_TAG = "PushPlugin";
@@ -64,6 +67,10 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                         senderID = jo.getString(SENDER_ID);
 
                         Log.v(LOG_TAG, "execute: senderID=" + senderID);
+
+                        // PushApps registration
+                        PALogger.setLogsEnabled(true);
+                        PushApps.register(getApplicationContext());
 
                         String savedSenderID = sharedPref.getString(SENDER_ID, "");
                         String savedRegID = sharedPref.getString(REGISTRATION_ID, "");
